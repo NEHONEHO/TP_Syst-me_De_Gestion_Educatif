@@ -1,0 +1,154 @@
+//connect to mysql with java
+//afficher la table créer sur mysql pour tester la connection
+package sqlDriver;
+
+import java.sql.*;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		try {
+			//1. get a connection to database
+			Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/SGE", "root", "strictement.69@");
+			
+			//2. create a statement
+			Statement myStmt = myConn.createStatement();
+			
+			//3. Execute SQL query
+			ResultSet myRs = myStmt.executeQuery("select * from departements");
+			
+			//4. Process the result set
+			while(myRs.next()) {
+				System.out.println(myRs.getInt("idDep")+" , "+myRs.getString("intituleDep")+" , "+myRs.getString("responsableDep"));
+			}
+		
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+
+	}
+
+}
+
+//inserer une nouvelle ligne dans la table sur mysqlligne en utilisant java
+package sqlDriver;
+
+import java.sql.*;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/SGE";
+		String user = "root";
+		String password = "strictement.69@";
+		
+		try {
+			//1. get a connection to database
+			Connection myConn = DriverManager.getConnection(url, user, password);
+			
+			//2. create a statement
+			Statement myStmt = myConn.createStatement();
+			
+			//3. Execute SQL query
+			String sql = "insert into departements"
+					    +"(intituleDep, responsableDep)"
+					    +"values('departement biologie geologie', 'Brown David')";
+			String sql1 = "insert into departements"
+					    +"(idDep)"
+					    +"values(4)";
+					    
+		    myStmt.executeUpdate(sql);
+		    myStmt.executeUpdate(sql1);
+			
+			//4. Process the result set
+			System.out.println("Insert complete.");
+		
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+
+	}
+
+}
+
+//Updating Data in a MySQL Database
+package sqlDriver;
+
+import java.sql.*;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/SGE";
+		String user = "root";
+		String password = "strictement.69@";
+		
+		try {
+			//1. get a connection to database
+			Connection myConn = DriverManager.getConnection(url, user, password);
+			
+			//2. create a statement
+			Statement myStmt = myConn.createStatement();
+			
+			//3. Execute SQL query
+			String sql = "update departements "
+					    +"set responsableDep = 'Private Mary'"
+					    +"where idDep = 2";
+					    
+		    myStmt.executeUpdate(sql);
+			
+			//4. Process the result set
+			System.out.println("Update complete.");
+		
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+
+	}
+
+}
+
+//Deleting Data from a MySQL Database
+package sqlDriver;
+
+import java.sql.*;
+
+public class Driver {
+
+	public static void main(String[] args) {
+		String url = "jdbc:mysql://localhost:3306/SGE";
+		String user = "root";
+		String password = "strictement.69@";
+		
+		try {
+			//1. get a connection to database
+			Connection myConn = DriverManager.getConnection(url, user, password);
+			
+			//2. create a statement
+			Statement myStmt = myConn.createStatement();
+			
+			//3. Execute SQL query
+			String sql = "delete from departements where responsableDep='Private Mary'";
+			
+			int rowsAffected = myStmt.executeUpdate(sql);
+			
+			//4. Process the result set
+			System.out.println("Rows affected: "+rowsAffected);
+			System.out.println("Delete complete.");
+		
+		}
+		catch (Exception exc) {
+			exc.printStackTrace();
+		}
+
+	}
+
+}
+
+//Prepared Statements
+
+
+
